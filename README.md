@@ -274,6 +274,16 @@ parameters:
     required: false
 ```
 
+## Troubleshooting
+
+If you run into issues uploading your talent to Talent Market — scan failures, profile validation errors, or anything unexpected — please [open an issue](https://github.com/CarbonKite/talent-template/issues) on this repo. Include:
+
+- Your repo URL (or a minimal reproduction)
+- The error message you received
+- Steps to reproduce
+
+We'll help you get published.
+
 ## License
 
 This project is licensed under the **Talent Market Attribution License (TMAL) v1.0**.

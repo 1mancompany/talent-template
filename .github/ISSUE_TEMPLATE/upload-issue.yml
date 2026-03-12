@@ -1,0 +1,57 @@
+name: Upload / Publishing Issue
+description: Report a problem uploading or publishing a talent to Talent Market
+labels: ["bug", "upload"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! Please fill in the details below so we can help you get published.
+
+  - type: input
+    id: repo_url
+    attributes:
+      label: Repo URL
+      description: Your talent repository URL (or a minimal reproduction)
+      placeholder: https://github.com/you/my-talent
+    validations:
+      required: true
+
+  - type: textarea
+    id: error_message
+    attributes:
+      label: Error Message
+      description: The exact error message you received (copy-paste or screenshot)
+      placeholder: "e.g. 'Failed to scan repo: profile.yaml missing required field: id'"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: What did you do before hitting the error?
+      value: |
+        1. Go to Add Talent page
+        2. Paste repo URL
+        3. Click Scan
+        4. See error
+    validations:
+      required: true
+
+  - type: dropdown
+    id: method
+    attributes:
+      label: Upload Method
+      options:
+        - Web UI (Add Talent page)
+        - REST API (/api/v1/repos)
+        - MCP tool
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Anything else that might help (screenshots, profile.yaml snippet, etc.)
+      placeholder: Optional

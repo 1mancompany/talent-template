@@ -1,0 +1,18 @@
+name: General Question / Bug
+description: Ask a question or report a general issue with the template
+labels: ["question"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What's your question or what went wrong?
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Any relevant details (repo URL, agent type, screenshots, etc.)
+      placeholder: Optional
