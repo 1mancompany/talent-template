@@ -12,6 +12,7 @@ Every talent is a directory with this structure:
 ```
 my-talent/
 ├── profile.yaml              # Required — identity & config
+├── DESCRIPTION.md            # Optional — rich description, demos, case studies
 ├── avatar.jpg                # Optional — talent avatar (png/jpg/svg/webp)
 ├── skills/                   # Required — one folder per skill
 │   └── skill-name/
@@ -361,6 +362,8 @@ Before publishing, verify:
 - [ ] `hiring_fee` is set (0 for free)
 - [ ] If self-hosted: `launch.sh` exists and is executable
 - [ ] No secrets/API keys are hardcoded anywhere
+- [ ] `DESCRIPTION.md` exists with agent overview, use cases, and optionally demos/success stories
+- [ ] No illegal content, political propaganda, or harmful material in any file
 
 ## Publishing
 

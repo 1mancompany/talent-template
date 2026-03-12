@@ -73,6 +73,7 @@ my-repo/
 ├── README.md
 ├── talent-a/
 │   ├── profile.yaml
+│   ├── DESCRIPTION.md    # Agent description, demos, success stories
 │   ├── avatar.jpg        # Each talent can have its own avatar
 │   ├── skills/
 │   │   └── core/
@@ -102,6 +103,7 @@ my-repo/
 ```
 my-talent/
 ├── profile.yaml          # Required — agent identity & configuration
+├── DESCRIPTION.md        # Optional — rich agent description, demos, success stories
 ├── avatar.jpg            # Optional — talent avatar (png/jpg/svg/webp, auto-loaded)
 ├── skills/               # Each skill is a folder with SKILL.md
 │   └── core/
