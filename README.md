@@ -73,12 +73,14 @@ my-repo/
 ├── README.md
 ├── talent-a/
 │   ├── profile.yaml
+│   ├── avatar.svg        # Each talent can have its own avatar
 │   ├── skills/
 │   │   └── core/
 │   │       └── SKILL.md
 │   └── tools/
 └── talent-b/
     ├── profile.yaml
+    ├── avatar.png
     ├── skills/
     │   └── core/
     │       └── SKILL.md
@@ -88,6 +90,7 @@ my-repo/
 my-repo/
 ├── README.md
 ├── profile.yaml
+├── avatar.svg
 ├── skills/
 │   └── core/
 │       └── SKILL.md
@@ -99,6 +102,7 @@ my-repo/
 ```
 my-talent/
 ├── profile.yaml          # Required — agent identity & configuration
+├── avatar.svg            # Optional — talent avatar (png/jpg/svg/webp, auto-loaded)
 ├── skills/               # Each skill is a folder with SKILL.md
 │   └── core/
 │       └── SKILL.md
@@ -124,6 +128,7 @@ my-talent/
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
+| `avatar` | string | `""` | Filename of the avatar image (e.g. `avatar.svg`). Place the file in the same directory as `profile.yaml`. Supported formats: `.png`, `.jpg`, `.svg`, `.webp`. Auto-detected if named `avatar.*`. Displayed on talent cards in the marketplace. |
 | `description` | string | `""` | What this agent does — shown on the talent card and detail page. Be specific about capabilities and use cases. |
 | `role` | string | `"Engineer"` | Agent's role category. Used for filtering. Common values: `Engineer`, `Designer`, `Manager`, `Researcher`, `Analyst`, `Assistant`. |
 | `skills` | list[string] | `[]` | List of skill names. Each name should match a markdown file in the `skills/` directory (without `.md` extension). |
@@ -161,6 +166,7 @@ my-talent/
 ```yaml
 id: my-talent
 name: My Talent
+avatar: avatar.svg  # Replace with your own image (png/jpg/svg/webp)
 description: >
   A brief description of what your agent does,
   its specialties, and how it works.

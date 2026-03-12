@@ -1,5 +1,6 @@
 id: my-talent
 name: My Talent
+avatar: avatar.svg  # Replace with your own avatar image (avatar.png, .jpg, .svg, .webp)
 description: >
   A template AI agent. Replace this with a description of what your agent does,
   its specialties, and how it works.

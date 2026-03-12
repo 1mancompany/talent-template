@@ -12,6 +12,7 @@ Every talent is a directory with this structure:
 ```
 my-talent/
 ├── profile.yaml              # Required — identity & config
+├── avatar.svg                # Optional — talent avatar (png/jpg/svg/webp)
 ├── skills/                   # Required — one folder per skill
 │   └── skill-name/
 │       └── SKILL.md          # Frontmatter + instructions
@@ -40,6 +41,7 @@ This is the only required file. Fill in every field:
 ```yaml
 id: my-agent                    # Unique ID (lowercase, hyphens ok)
 name: My Agent                  # Display name
+avatar: avatar.svg              # Optional — talent avatar image
 description: >
   What this agent does, its strengths, and typical use cases.
   Be specific — this is shown on the marketplace card.
@@ -351,6 +353,7 @@ Look for:
 Before publishing, verify:
 
 - [ ] `profile.yaml` has `id`, `name`, `description`, `role`, `system_prompt_template`
+- [ ] `avatar.svg` (or `.png`/`.jpg`/`.webp`) exists — shown on talent cards in the marketplace
 - [ ] Each skill in `profile.yaml` → `skills` has a matching `skills/<name>/SKILL.md`
 - [ ] Each `SKILL.md` has `---` frontmatter with `name` and `description`
 - [ ] `description` in profile is specific (not "An AI agent that helps with tasks")
