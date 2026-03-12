@@ -15,8 +15,15 @@ my-talent/
 ├── skills/                   # Required — one folder per skill
 │   └── skill-name/
 │       └── SKILL.md          # Frontmatter + instructions
-├── tools/
-│   └── manifest.yaml         # Optional — tool declarations
+├── tools/                    # Optional — one folder per tool
+│   ├── .mcp.json             # MCP server definitions (standard format)
+│   ├── code-search/
+│   │   ├── TOOL.md           # Tool description & usage docs
+│   │   └── manifest.yaml     # Tool metadata (name, type, params)
+│   └── run-tests/
+│       ├── TOOL.md
+│       ├── manifest.yaml
+│       └── run.sh            # Tool implementation (if custom)
 ├── launch.sh                 # Optional — self-hosted startup
 ├── heartbeat.sh              # Optional — health check
 └── manifest.json             # Optional — settings UI schema
@@ -80,18 +87,76 @@ Detailed instructions for the agent when this skill is active.
 - Example input → expected output
 ```
 
-### 3. Declare Tools in `tools/manifest.yaml` (Optional)
+### 3. Create Tool Folders under `tools/`
 
+Each tool is a **folder** containing its docs, metadata, and optionally implementation code.
+
+**MCP tools** — place `.mcp.json` under `tools/` (standard format):
+
+```
+tools/
+├── .mcp.json               # MCP server definitions
+├── filesystem/
+│   └── TOOL.md             # What this tool does, when to use it
+└── github/
+    └── TOOL.md
+```
+
+`tools/.mcp.json`:
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-filesystem"],
+      "env": {}
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-github"],
+      "env": {
+        "GITHUB_TOKEN": ""
+      }
+    }
+  }
+}
+```
+
+**Custom tools** — each gets a folder with `TOOL.md`, `manifest.yaml`, and implementation:
+
+```
+tools/
+└── run-tests/
+    ├── TOOL.md              # Usage docs
+    ├── manifest.yaml        # Metadata
+    └── run.sh               # Implementation
+```
+
+`tools/run-tests/TOOL.md`:
+```markdown
+---
+name: run-tests
+description: Execute the project test suite and report results.
+---
+
+# Run Tests
+
+Runs the full test suite. Use after code changes to verify correctness.
+
+## Usage
+Invoke this tool to run `npm test` and return pass/fail results.
+```
+
+`tools/run-tests/manifest.yaml`:
 ```yaml
-tools:
-  - name: code_search
-    description: Search codebase for patterns and symbols
-    type: mcp
-    server: filesystem
-  - name: run_tests
-    description: Execute the project test suite
-    type: shell
-    command: npm test
+name: run-tests
+type: shell
+command: bash run.sh
+parameters:
+  - name: filter
+    type: string
+    description: Test name filter pattern
+    required: false
 ```
 
 ---
@@ -125,13 +190,28 @@ mkdir -p my-talent/skills/code-review
 
 If `CLAUDE.md` has sections like "## Code Review", "## Debugging", "## Refactoring" — each becomes a separate skill.
 
-**3. Extract MCP tools from `.mcp.json`**
+**3. Copy `.mcp.json` into `tools/`**
 
 ```bash
-cat /path/to/claude-agent/.mcp.json
+mkdir -p my-talent/tools
+cp /path/to/claude-agent/.mcp.json my-talent/tools/.mcp.json
 ```
 
-Each MCP server's tools should be listed in `tools/manifest.yaml`. Note any `env` variables — these become secrets the user must configure.
+No conversion needed — `.mcp.json` keeps the standard format. Optionally create a `TOOL.md` for each MCP server to document its usage:
+
+```bash
+mkdir -p my-talent/tools/filesystem
+cat > my-talent/tools/filesystem/TOOL.md << 'EOF'
+---
+name: filesystem
+description: Read and search files in the project directory.
+---
+
+# Filesystem Tool
+
+MCP server for file system access. Provides read, search, and directory listing.
+EOF
+```
 
 **4. Set agent_family and auth_method**
 

@@ -52,8 +52,10 @@ my-talent/
 ├── skills/               # Each skill is a folder with SKILL.md
 │   └── core/
 │       └── SKILL.md
-├── tools/
-│   └── manifest.yaml     # Optional — tool declarations
+├── tools/                # Each tool is a folder with TOOL.md
+│   ├── .mcp.json         # MCP server definitions (standard format)
+│   └── filesystem/
+│       └── TOOL.md       # Tool description & usage docs
 ├── manifest.json         # Optional — settings UI schema
 ├── launch.sh             # Optional — startup script (self-hosted)
 └── heartbeat.sh          # Optional — health check script
@@ -157,16 +159,69 @@ Describe the task, constraints, and expected behavior.
 
 ## Tools
 
-Declare tools in `tools/manifest.yaml`:
+Each tool is a **folder** inside `tools/` containing a `TOOL.md` and optionally a `manifest.yaml` and implementation code.
 
+### MCP Tools
+
+Place `tools/.mcp.json` in the standard format. Create a folder per MCP server with a `TOOL.md`:
+
+```
+tools/
+├── .mcp.json               # Standard MCP server definitions
+├── filesystem/
+│   └── TOOL.md             # What this tool does, when to use it
+└── github/
+    └── TOOL.md
+```
+
+`tools/.mcp.json`:
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-filesystem"],
+      "env": {}
+    }
+  }
+}
+```
+
+Empty `env` values become secrets the user must configure after hiring.
+
+### Custom Tools
+
+Each custom tool gets a folder with `TOOL.md`, `manifest.yaml`, and implementation:
+
+```
+tools/
+└── run-tests/
+    ├── TOOL.md              # Usage docs (with frontmatter)
+    ├── manifest.yaml        # Metadata & parameters
+    └── run.sh               # Implementation
+```
+
+`tools/run-tests/TOOL.md`:
+```markdown
+---
+name: run-tests
+description: Execute the project test suite and report results.
+---
+
+# Run Tests
+Runs the full test suite. Use after code changes to verify correctness.
+```
+
+`tools/run-tests/manifest.yaml`:
 ```yaml
-tools:
-  - name: my_tool
-    description: What this tool does
-    parameters:
-      - name: input
-        type: string
-        description: Tool input
+name: run-tests
+type: shell
+command: bash run.sh
+parameters:
+  - name: filter
+    type: string
+    description: Test name filter pattern
+    required: false
 ```
 
 ## License
