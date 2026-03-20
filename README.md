@@ -18,49 +18,59 @@ A starter template for creating AI agent talents compatible with [Talent Market]
 
 We encourage using AI coders (Claude Code, Cursor, Copilot, etc.) to build and convert talents. When prompting your AI coder, include:
 
-> Follow the instructions in `vibe_coding_guide.md` to convert this agent into the Talent Market template format.
+> Follow the instructions in `vibe-coding-guide.md` to convert this agent into the Talent Market template format.
 
-See [`vibe_coding_guide.md`](./vibe_coding_guide.md) for the full conversion guide.
+See [`vibe-coding-guide.md`](./vibe-coding-guide.md) for the full conversion guide.
 
 ### Quick Recipe: Convert an Existing Agent
+
+> **IMPORTANT:** Always create a **new separate repo** for each converted talent. Do NOT commit into this template repo — it should stay clean as a reference.
 
 **From a Claude Code agent:**
 
 ```
-I have a Claude Code agent at /path/to/my-agent (it has CLAUDE.md and .mcp.json).
-Convert it into the Talent Market template format (https://github.com/CarbonKite/talent-template) following vibe_coding_guide.md.
+Convert the agent at https://github.com/user/agent-repo into the Talent Market template format
+(https://github.com/1mancompany/talent-template) following vibe-coding-guide.md.
 
 Steps:
-1. Create profile.yaml from CLAUDE.md (extract name, description, system prompt)
-2. Split capabilities into skills/<name>/SKILL.md folders
-3. Copy .mcp.json to tools/.mcp.json, create TOOL.md for each MCP server
-4. Push to GitHub
+1. Create a new repo under my GitHub account
+2. Create profile.yaml from CLAUDE.md (extract name, description, system prompt)
+3. Split capabilities into skills/<name>/SKILL.md folders
+4. Copy .mcp.json to tools/.mcp.json, create TOOL.md for each MCP server
+5. Copy any other files or folders from the source
+6. Add original repo citation to DESCRIPTION.md
+7. Push to GitHub
 ```
 
 **From an OpenClaw agent:**
 
 ```
-I have an OpenClaw agent at /path/to/openclaw-agent.
-Convert it into the Talent Market template format (https://github.com/CarbonKite/talent-template) following vibe_coding_guide.md.
+Convert the agent at https://github.com/user/agent-repo into the Talent Market template format
+(https://github.com/1mancompany/talent-template) following vibe-coding-guide.md.
 
 Steps:
-1. Create profile.yaml (set agent_family: openclaw, hosting: self)
-2. Map each workflow node to a skills/<name>/SKILL.md folder
-3. Copy MCP configs to tools/.mcp.json, keep launch.sh
-4. Push to GitHub
+1. Create a new repo under my GitHub account
+2. Create profile.yaml (set agent_family: openclaw, hosting: self)
+3. Map each workflow node to a skills/<name>/SKILL.md folder
+4. Copy MCP configs to tools/.mcp.json, keep launch.sh
+5. Add original repo citation to DESCRIPTION.md
+6. Push to GitHub
 ```
 
 **From any other agent (LangChain, CrewAI, AutoGen, etc.):**
 
 ```
-I have an agent at /path/to/agent.
-Convert it into the Talent Market template format (https://github.com/CarbonKite/talent-template) following vibe_coding_guide.md.
+Convert the agent at https://github.com/user/agent-repo into the Talent Market template format
+(https://github.com/1mancompany/talent-template) following vibe-coding-guide.md.
 
 Steps:
-1. Find the system prompt in the source code, create profile.yaml
-2. Identify distinct capabilities, create skills/<name>/SKILL.md for each
-3. List tools in tools/<name>/TOOL.md folders
-4. Push to GitHub
+1. Create a new repo under my GitHub account
+2. Find the system prompt in the source code, create profile.yaml
+3. Identify distinct capabilities, create skills/<name>/SKILL.md for each
+4. List tools in tools/<name>/TOOL.md folders
+5. Copy any other files or folders from the source
+6. Add original repo citation to DESCRIPTION.md
+7. Push to GitHub
 ```
 
 ## Repo Structure
@@ -298,7 +308,7 @@ Buyers who purchase your talent are automatically added as collaborators to the 
 
 ## Troubleshooting
 
-If you run into issues uploading your talent to Talent Market — scan failures, profile validation errors, or anything unexpected — please [open an issue](https://github.com/CarbonKite/talent-template/issues) on this repo. Include:
+If you run into issues uploading your talent to Talent Market — scan failures, profile validation errors, or anything unexpected — please [open an issue](https://github.com/1mancompany/talent-template/issues) on this repo. Include:
 
 - Your repo URL (or a minimal reproduction)
 - The error message you received
@@ -319,16 +329,15 @@ retain the Citation section below in your README. See [LICENSE](./LICENSE) for f
 
 > **DO NOT REMOVE THIS SECTION** — Required by the [Talent Market Attribution License](./LICENSE).
 
-This talent was built using the [Talent Market](https://carbonkites.com) template by [Zhengxu Yu](mailto:yuzxfred@gmail.com) / [CarbonKite](https://github.com/CarbonKite).
+This talent was built using the [Talent Market](https://one-man-company.com) template by [Zhengxu Yu](mailto:yuzxfred@gmail.com) / [1mancompany](https://github.com/1mancompany).
 
 ```
 @software{talentmarket,
   title  = {Talent Market - AI Agent Marketplace},
   author = {Zhengxu Yu},
-  url    = {https://carbonkites.com},
+  email  = {yuzxfred@gmail.com},
+  url    = {https://one-man-company.com},
   year   = {2026}
-}
-  email  = {yuzxfred@gmail.com}
 }
 ```
 

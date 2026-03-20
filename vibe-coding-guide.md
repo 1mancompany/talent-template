@@ -3,7 +3,7 @@
 > **For AI coders (Claude Code, Cursor, Copilot, etc.):**
 > This guide tells you exactly how to convert an existing AI agent project
 > into the Talent Market template format so it can be published on
-> [carbonkites.com](https://carbonkites.com).
+> [one-man-company.com](https://one-man-company.com).
 
 ## Target Structure
 
@@ -432,18 +432,25 @@ Before publishing, verify:
 
 ## Publishing
 
+**IMPORTANT: Create a new, separate repo for each converted talent. Do NOT commit into this template repo.**
+
 ```bash
-# Push to GitHub
+# Create a new directory for the talent (NOT inside the template repo)
+mkdir /tmp/my-talent && cd /tmp/my-talent
+
+# ... create all talent files (profile.yaml, DESCRIPTION.md, skills/, tools/, etc.) ...
+
+# Push to GitHub as a new repo
 git init && git add -A && git commit -m "Initial talent"
 gh repo create my-talent --public --push
 
 # Register on Talent Market
-# Go to https://carbonkites.com → Add Talent → paste your repo URL
+# Go to https://one-man-company.com → Add Talent → paste your repo URL
 ```
 
 Or via API:
 ```bash
-curl -X POST https://carbonkites.com/api/v1/repos \
+curl -X POST https://one-man-company.com/api/v1/repos \
   -H "X-API-Key: tm_live_..." \
   -H "Content-Type: application/json" \
   -d '{"url": "https://github.com/you/my-talent"}'
